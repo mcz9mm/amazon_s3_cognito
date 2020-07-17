@@ -44,9 +44,11 @@ class AwsHelper(private val context: Context, private val onUploadCompleteListen
         val amazonS3Client = AmazonS3Client(credentialsProvider)
         amazonS3Client.setRegion(com.amazonaws.regions.Region.getRegion(Regions.US_EAST_1))
         transferUtility = TransferUtility(amazonS3Client, context)
+        val metadata = ObjectMetadata()
+        metadata.contentType = "image/jpeg"
 
         nameOfUploadedFile = clean(image.name)
-        val transferObserver = transferUtility.upload(BUCKET_NAME, nameOfUploadedFile, image)
+        val transferObserver = transferUtility.upload(BUCKET_NAME, nameOfUploadedFile, image, metadata)
 
         transferObserver.setTransferListener(object : TransferListener {
             override fun onStateChanged(id: Int, state: TransferState) {
