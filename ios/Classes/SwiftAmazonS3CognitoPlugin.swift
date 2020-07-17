@@ -33,6 +33,7 @@ public class SwiftAmazonS3CognitoPlugin: NSObject, FlutterPlugin {
               uploadRequest?.key = nameGenerator()
               uploadRequest?.body = fileUrl as URL
               uploadRequest?.acl = .private
+              uploadRequest?.contentType = "image/jpeg"
 
               let credentialsProvider = AWSCognitoCredentialsProvider(
                   regionType: AWSRegionType.USEast1,
@@ -97,7 +98,7 @@ public class SwiftAmazonS3CognitoPlugin: NSObject, FlutterPlugin {
           uploadRequest?.body = fileUrl as URL
           uploadRequest
           uploadRequest?.acl = .private
-
+          uploadRequest?.contentType = "image/jpeg"
 
           let credentialsProvider = AWSCognitoCredentialsProvider(
               regionType: region1,
